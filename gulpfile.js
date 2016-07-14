@@ -80,7 +80,7 @@ gulp.src('./assets/font/**/*')
 });
 
 gulp.task('js',function(){
-gulp.src('./assets/js/*.js')
+gulp.src('./public/js/*.js')
 .pipe(uglify())
 .pipe(gulp.dest('./public/js/'))
 .pipe(connect.reload());
@@ -137,7 +137,7 @@ gulp.task('copyFiles', function() {
 
 // Build React
 gulp.task('build_react', function () {
-    return browserify({entries: './assets/jsx/app.jsx', extensions: ['.jsx'], debug: true})
+    return browserify({entries: ['./assets/jsx/app.jsx', './assets/js/script.js'], extensions: ['.jsx', '.js'], debug: true})
         .transform('babelify', {presets: ['es2015', 'react']})
         .bundle()
         .pipe(source('bundle.js'))
@@ -187,7 +187,7 @@ gulp.task('watch',function(){
   gulp.watch("./assets/sass/**/*.scss", ['sass']);
   gulp.watch("./assets/jade/*.jade", ['jade']);
   gulp.watch("./assets/*.html", ['html']);
-  gulp.watch("./assets/jsx/*.jsx", ['build_react']);
+  gulp.watch(["./assets/jsx/*.jsx", "./assets/js/*.js"], ['build_react']);  
   gulp.watch("./assets/js/*.js", ['js']);
   gulp.watch("./assets/js/libs/*.js", ['jslibs']);
   gulp.watch("./assets/js/modules/**/*.js", ['jsmods']);
@@ -199,7 +199,7 @@ gulp.task('watch',function(){
 
 // Default
 gulp.task('default', ['clean','jade', 'sass', 'build_react', 'js','jslibs', 'jsmods', 'serve', 'copyFiles','img','watch']);
-gulp.task('run', ['jade', 'sass', 'js','jslibs', 'jsmods', 'serve', 'copyFiles','watch']);
+gulp.task('run', ['jade', 'build_react', 'sass', 'js','jslibs', 'jsmods', 'serve', 'copyFiles','watch']);
 gulp.task('build',['clean','svgSpriteBuild','build_react','img','copyFiles']);
 
 //gulp.task('default', ['clean','jade', 'sass', 'build', 'serve', 'copyFiles','img','watch']);
