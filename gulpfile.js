@@ -34,6 +34,11 @@ svgSprite				= require('gulp-svg-sprite'); //  создание спрайта
 	cheerio = require('gulp-cheerio'), // удаление лишних атрибутов из svg
 	replace = require('gulp-replace'); // фиксинг некоторых багов
 
+/* -- Управление обновлениями пакетов Bower -- */
+
+var bower = require('gulp-bower');
+
+
 // browser-sync
 
 var server = require("browser-sync");
@@ -187,7 +192,7 @@ gulp.task('watch',function(){
   gulp.watch("./assets/sass/**/*.scss", ['sass']);
   gulp.watch("./assets/jade/*.jade", ['jade']);
   gulp.watch("./assets/*.html", ['html']);
-  gulp.watch(["./assets/jsx/*.jsx", "./assets/js/*.js"], ['build_react']);  
+  gulp.watch(["./assets/jsx/*.jsx", "./assets/js/*.js"], ['build_react']);
   gulp.watch("./assets/js/*.js", ['js']);
   gulp.watch("./assets/js/libs/*.js", ['jslibs']);
   gulp.watch("./assets/js/modules/**/*.js", ['jsmods']);
@@ -195,6 +200,10 @@ gulp.task('watch',function(){
   gulp.watch("./public/js/*.js").on("change", server.reload );
   gulp.watch("./public/*.html").on("change", server.reload );
   gulp.watch("./public/css/*.css").on("change", server.reload );
+});
+
+gulp.task('bower', function() {
+  return bower({ directory: './assets/bower_components' })
 });
 
 // Default
