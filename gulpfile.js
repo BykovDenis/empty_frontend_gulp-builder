@@ -29,7 +29,7 @@ var source = require('vinyl-source-stream');
 /*  ----------------------------  */
 
 /* --  Работа с SVG изображениями */
-svgSprite				= require('gulp-svg-sprite'); //  создание спрайта
+svgSprite	= require('gulp-svg-sprite'); //  создание спрайта
   svgmin = require('gulp-svgmin'), // минификация SVG
 	cheerio = require('gulp-cheerio'), // удаление лишних атрибутов из svg
 	replace = require('gulp-replace'); // фиксинг некоторых багов
@@ -132,7 +132,10 @@ livereload: true
 gulp.task('copyFiles', function() {
   // copy any html files in source/ to public/
   gulp.src('./assets/fonts/*').pipe(gulp.dest('./public/fonts'));
-  gulp.src('./assets/sprites/sprite.svg/sprite.svg').pipe(gulp.dest('./public/img/sprite.svg'));
+  gulp.src('./assets/sprites/sprite.svg/*').pipe(gulp.dest('./public/img'));
+  gulp.src('./assets/bower_components/angular/*').pipe(gulp.dest('./public/js/lib/angular'));
+  // копируем файлы бутстрапа
+  gulp.src('./assets/bower_components/bootstrap/dist/css/bootstrap.min.css').pipe(gulp.dest('./public/css'));
 });
 
 // Build React

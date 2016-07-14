@@ -3,3 +3,7 @@
   clear: both;
   content: '';
 }
+
+@mixin block-centered {
+  margin: 0 auto;
+}
