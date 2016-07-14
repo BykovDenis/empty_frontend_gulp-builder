@@ -1,8 +1,8 @@
 {
-  "name": "project",
-  "description": "Полный проект для разработки",
+  "name": "angular-phonecat",
+  "description": "A starter project for AngularJS",
   "version": "0.0.0",
-  "homepage": "https://github.com/BykovDenis",
+  "homepage": "https://github.com/angular/angular-phonecat",
   "license": "MIT",
   "private": true,
   "dependencies": {

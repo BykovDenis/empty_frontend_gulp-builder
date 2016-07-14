@@ -34,11 +34,6 @@ svgSprite				= require('gulp-svg-sprite'); //  создание спрайта
 	cheerio = require('gulp-cheerio'), // удаление лишних атрибутов из svg
 	replace = require('gulp-replace'); // фиксинг некоторых багов
 
-/* -- Управление обновлениями пакетов Bower -- */
-
-var bower = require('gulp-bower');
-
-
 // browser-sync
 
 var server = require("browser-sync");
@@ -202,13 +197,18 @@ gulp.task('watch',function(){
   gulp.watch("./public/css/*.css").on("change", server.reload );
 });
 
-gulp.task('bower', function() {
-  return bower({ directory: './assets/bower_components' })
-});
-
 // Default
 gulp.task('default', ['clean','jade', 'sass', 'build_react', 'js','jslibs', 'jsmods', 'serve', 'copyFiles','img','watch']);
 gulp.task('run', ['jade', 'build_react', 'sass', 'js','jslibs', 'jsmods', 'serve', 'copyFiles','watch']);
 gulp.task('build',['clean','svgSpriteBuild','build_react','img','copyFiles']);
+
+
+/* Обновления пакетов от bower */
+var bower = require('gulp-bower');
+
+gulp.task('bower', function() {
+  return bower({ directory: './assets/bower_components/' });
+});
+
 
 //gulp.task('default', ['clean','jade', 'sass', 'build', 'serve', 'copyFiles','img','watch']);
